@@ -16,3 +16,11 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+
+// Repérer la flèche gauche du slider
+let flecheGauche = document.querySelector("#banner .arrow_left")
+console.log(flecheGauche)
+
+// Repérer la flèche droit du slider
+let flecheDroit = document.querySelector("#banner .arrow_right")
+console.log(flecheDroit)
