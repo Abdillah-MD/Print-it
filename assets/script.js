@@ -16,49 +16,61 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
-let i = 1 
+let i = 0 
 console.log(slides[i])
 
 
 // Récupérer les élements qui se trouvent dans le banner 
 let bannerImg = document.querySelector("#banner .banner-img")
 console.log(bannerImg)
-let dot = document.querySelectorAll(".dots .dot")
+let dots = document.querySelector(".dots")
 let bannerTxt = document.querySelector("#banner p")
 
+const affichage = (index) => {
+        bannerImg.src = './assets/images/slideshow/' + slides[index].image
+        bannerTxt.innerHTML = `<p>${slides[index].tagLine}</p>`
+}
 
+affichage(i)
 
 /////////////////////////// Mes fonctions /////////////////////
 // Repérer la flèche gauche du slider
 let flecheGauche = document.querySelector("#banner .arrow_left")
 console.log(flecheGauche)
-
-
 flecheGauche.addEventListener("click", () => {
-	if (i > 0) {
-        i--
-    } else {
-        i = slides.length - 1
-    }
-    
-    bannerImg.src = './assets/images/slideshow/' + slides[i].image
-    bannerTxt.innerHTML = `<p>${slides[i].tagLine}</p>`
-	
-	console.log("Vous avez cliqué sur la flèche gauche")
+	i-- 
+	if (i === -1) {i = slides.length - 1}
+	affichage(i)
+
+	console.log("Vous avez cliqué sur la flèche gauche." + " i = " + i)
 })
 
-// Repérer la flèche droit du slider
+// Repérer la flèche droite du slider
 let flecheDroit = document.querySelector("#banner .arrow_right")
 console.log(flecheDroit)
 console.log(i)
 flecheDroit.addEventListener("click", () => {
-	bannerImg.src = './assets/images/slideshow/'+ slides[i].image
-	bannerTxt.innerHTML = `<p> ${slides[i].tagLine}</p>`
 	i++
-	console.log(i + " " + bannerImg + " " + bannerTxt)
+	if (i === slides.length) {i = 0}
+	affichage(i)
 
-	if (i >= slides.length) {
-		i= 0
-	}	
-	console.log("Vous avez cliqué sur la flèche droit")
+	console.log("Vous avez cliqué sur la flèche droite." + " i = " + i)
+})
+
+// Ecouter & Intéragir avec les dots 
+let dot = document.createElement("div")
+
+for (let nb = 0; nb < slides.length; nb++ ) {
+	dot = document.createElement("div")
+	dot.className = "dot"
+	dots.appendChild(dot)
+	console.log(dot)
+}
+
+let nbDot = document.querySelectorAll(".dot")
+console.log(nbDot)
+
+nbDot.addEventListener("click", () => {
+	nbDot[i] = slides[i]
+	console.log("vous avez cliqué sur " + nbDot)
 })
