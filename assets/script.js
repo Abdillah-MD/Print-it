@@ -58,6 +58,13 @@ for (let index = 0; index < slides.length; index++) {
     let dot = document.createElement("div")
     dot.className = "dot"
     dotsContainer.appendChild(dot)
+
+    // Écouter & interagir avec les dots
+    dot.addEventListener("click", () => {
+        i = index
+        affichage(i)
+        updateDots()
+    })
 }
 
 let nbDot = document.querySelectorAll(".dot")
@@ -73,12 +80,3 @@ function updateDots() {
         }
     })
 }
-
-// Écouter & interagir avec les dots
-nbDot.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-        i = index
-        affichage(i)
-        updateDots()
-    })
-})
